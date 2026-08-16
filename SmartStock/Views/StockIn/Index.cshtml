@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SmartStock.Models.StockIn>
+@{
+    ViewBag.Title = "Stock In";
+}
+
+<h2>Stock In</h2>
+<p>@Html.ActionLink("+ New Stock In", "Create", null, new { @class = "btn btn-primary" })</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Supplier</th>
+            <th>Quantity</th>
+            <th>Unit Cost</th>
+            <th>Total Cost</th>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Product.ProductName</td>
+                <td>@item.Supplier.SupplierName</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitCost.ToString("N2")</td>
+                <td>@item.TotalCost.ToString("N2")</td>
+                <td>@item.StockInDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.ReferenceNo</td>
+                <td>@Html.ActionLink("View", "Details", new { id = item.StockInId }, new { @class = "btn btn-sm btn-info" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No stock in transactions yet.</p>
+}

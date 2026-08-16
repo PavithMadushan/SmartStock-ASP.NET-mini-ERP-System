@@ -132,6 +132,8 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\StockInController.cs" />
+    <Compile Include="Controllers\StockOutController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Data\SmartStockDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -147,6 +149,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\StockInViewModel.cs" />
+    <Compile Include="ViewModels\StockOutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -237,6 +241,12 @@
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\StockIn\Index.cshtml" />
+    <Content Include="Views\StockIn\Create.cshtml" />
+    <Content Include="Views\StockIn\Details.cshtml" />
+    <Content Include="Views\StockOut\Index.cshtml" />
+    <Content Include="Views\StockOut\Create.cshtml" />
+    <Content Include="Views\StockOut\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,37 @@
+﻿@model SmartStock.Models.StockIn
+@{
+    ViewBag.Title = "Stock In Details";
+}
+
+<h2>Stock In Details</h2>
+
+<dl class="dl-horizontal">
+    <dt>Product</dt>
+    <dd>@Model.Product.ProductName (@Model.Product.ProductCode)</dd>
+
+    <dt>Supplier</dt>
+    <dd>@Model.Supplier.SupplierName</dd>
+
+    <dt>Quantity</dt>
+    <dd>@Model.Quantity</dd>
+
+    <dt>Unit Cost</dt>
+    <dd>@Model.UnitCost.ToString("N2")</dd>
+
+    <dt>Total Cost</dt>
+    <dd>@Model.TotalCost.ToString("N2")</dd>
+
+    <dt>Date</dt>
+    <dd>@Model.StockInDate.ToString("yyyy-MM-dd HH:mm")</dd>
+
+    <dt>Reference No</dt>
+    <dd>@Model.ReferenceNo</dd>
+
+    <dt>Remarks</dt>
+    <dd>@Model.Remarks</dd>
+
+    <dt>Current Stock (after this transaction)</dt>
+    <dd><strong>@Model.Product.CurrentStock</strong></dd>
+</dl>
+
+@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })

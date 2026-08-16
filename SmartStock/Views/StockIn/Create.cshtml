@@ -1,0 +1,68 @@
+﻿@model SmartStock.ViewModels.StockInViewModel
+@{
+    ViewBag.Title = "New Stock In";
+}
+
+<h2>New Stock In</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductId)
+        @Html.DropDownListFor(m => m.ProductId, Model.ProductList, "-- Select Product --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ProductId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SupplierId)
+        @Html.DropDownListFor(m => m.SupplierId, Model.SupplierList, "-- Select Supplier --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.SupplierId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Quantity)
+        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", id = "Quantity" })
+        @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UnitCost)
+        @Html.TextBoxFor(m => m.UnitCost, new { @class = "form-control", id = "UnitCost" })
+        @Html.ValidationMessageFor(m => m.UnitCost, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Total Cost (auto-calculated)</label>
+        <input type="text" id="TotalCostDisplay" class="form-control" disabled="disabled" />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReferenceNo)
+        @Html.TextBoxFor(m => m.ReferenceNo, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Remarks)
+        @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", rows = 2 })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
+
+@section scripts {
+    <script>
+        // Live preview only - the SERVER always recalculates TotalCost itself on save,
+        // this is just a UX convenience so the user can see the total before submitting.
+        function updateTotalCost() {
+            var qty = parseFloat($('#Quantity').val()) || 0;
+            var cost = parseFloat($('#UnitCost').val()) || 0;
+            var total = qty * cost;
+            $('#TotalCostDisplay').val(total.toFixed(2));
+        }
+        $('#Quantity, #UnitCost').on('input', updateTotalCost);
+    </script>
+}

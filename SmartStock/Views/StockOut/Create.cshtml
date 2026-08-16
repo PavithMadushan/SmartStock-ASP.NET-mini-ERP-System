@@ -1,0 +1,75 @@
+﻿@model SmartStock.ViewModels.StockOutViewModel
+@{
+    ViewBag.Title = "New Stock Out";
+}
+
+<h2>New Stock Out</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductId)
+        @Html.DropDownListFor(m => m.ProductId, Model.ProductList, "-- Select Product --", new { @class = "form-control", id = "ProductId" })
+        @Html.ValidationMessageFor(m => m.ProductId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Available Stock</label>
+        <input type="text" id="AvailableStockDisplay" class="form-control" value="@(ViewBag.AvailableStock ?? "")" disabled="disabled" />
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Quantity)
+        @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Purpose)
+        @Html.TextBoxFor(m => m.Purpose, new { @class = "form-control", placeholder = "e.g. Sales Order, Internal Use" })
+        @Html.ValidationMessageFor(m => m.Purpose, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReferenceNo)
+        @Html.TextBoxFor(m => m.ReferenceNo, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Remarks)
+        @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control", rows = 2 })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
+
+@section scripts {
+    <script>
+        // When a product is selected, ask the server for its real current stock via AJAX.
+        // This is DISPLAY ONLY - the actual validation always happens server-side on save,
+        // so tampering with this value in the browser has no effect on the real transaction.
+        function loadAvailableStock() {
+            var productId = $('#ProductId').val();
+            if (!productId) {
+                $('#AvailableStockDisplay').val('');
+                return;
+            }
+            $.getJSON('@Url.Action("GetAvailableStock", "StockOut")', { productId: productId }, function (data) {
+                $('#AvailableStockDisplay').val(data.availableStock);
+            });
+        }
+
+        $('#ProductId').on('change', loadAvailableStock);
+
+        // Run once on page load in case a product is already selected (e.g. after a validation error)
+        $(document).ready(function () {
+            if ($('#ProductId').val()) {
+                loadAvailableStock();
+            }
+        });
+    </script>
+}
