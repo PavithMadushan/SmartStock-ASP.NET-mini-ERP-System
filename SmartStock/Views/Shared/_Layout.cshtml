@@ -23,6 +23,9 @@
                     <li class="nav-item">@Html.ActionLink("Products", "Index", "Products", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Categories", "Index", "Categories", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Suppliers", "Index", "Suppliers", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Stock In", "Index", "StockIn", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Stock Out", "Index", "StockOut", null, new { @class = "nav-link" })</li>
+
                 </ul>
 
                 @if (Request.IsAuthenticated)
