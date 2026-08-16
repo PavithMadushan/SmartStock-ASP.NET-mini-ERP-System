@@ -16,12 +16,6 @@ namespace SmartStock
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            using (var db = new SmartStock.Data.SmartStockDbContext())
-            {
-                var count = db.Products.Count();
-                System.Diagnostics.Debug.WriteLine("Products in DB: " + count);
-            }
         }
     }
 }

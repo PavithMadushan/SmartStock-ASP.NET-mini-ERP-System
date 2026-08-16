@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="jumbotron">
+    <h2>Welcome, @Session["FullName"]!</h2>
+    <p>You are logged in as <strong>@Session["Role"]</strong>.</p>
+    <p>This is a placeholder — the full dashboard with KPIs and charts will be built in Phase 5.</p>
+    @using (Html.BeginForm("Logout", "Account"))
+    {
+        <button type="submit" class="btn btn-danger">Logout</button>
+    }
+</div>

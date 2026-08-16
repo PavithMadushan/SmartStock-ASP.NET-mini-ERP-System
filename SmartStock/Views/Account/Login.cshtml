@@ -1,0 +1,107 @@
+﻿@model SmartStock.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Login - SmartStock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f4f6f9;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-card {
+            width: 380px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 35px 30px;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+            .login-logo h2 {
+                color: #1a2942;
+                font-weight: 700;
+                letter-spacing: 1px;
+            }
+
+        .btn-login {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            width: 100%;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+            .btn-login:hover {
+                background-color: #1d4ed8;
+                border-color: #1d4ed8;
+            }
+
+        .demo-hint {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div class="login-logo">
+            <h2>SMARTSTOCK</h2>
+            <small class="text-muted">Inventory &amp; Stock Management</small>
+        </div>
+
+        @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Username)
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Enter username" })
+                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Enter password" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-login">Login</button>
+        }
+
+        <div class="demo-hint">
+            Demo account: <strong>admin</strong> / <strong>admin123</strong>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
