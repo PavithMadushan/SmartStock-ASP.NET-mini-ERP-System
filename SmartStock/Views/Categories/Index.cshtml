@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SmartStock.Models.Category>
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+<p>@Html.ActionLink("+ New Category", "Create", null, new { @class = "btn btn-primary" })</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Category Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoryName</td>
+                <td>@item.Description</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CategoryId }, new { @class = "btn btn-sm btn-warning" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

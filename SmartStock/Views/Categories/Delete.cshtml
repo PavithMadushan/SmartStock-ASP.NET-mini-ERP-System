@@ -1,0 +1,18 @@
+﻿@model SmartStock.Models.Category
+@{
+    ViewBag.Title = "Delete Category";
+}
+
+<h2>Delete Category</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.CategoryName</strong>?
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.CategoryId)
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}

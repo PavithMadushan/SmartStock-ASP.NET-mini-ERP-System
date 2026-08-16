@@ -1,0 +1,18 @@
+﻿@model SmartStock.Models.Supplier
+@{
+    ViewBag.Title = "Delete Supplier";
+}
+
+<h2>Delete Supplier</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.SupplierName</strong>?
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.SupplierId)
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}

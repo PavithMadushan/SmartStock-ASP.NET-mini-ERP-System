@@ -1,0 +1,34 @@
+﻿@model IEnumerable<SmartStock.Models.Supplier>
+@{
+    ViewBag.Title = "Suppliers";
+}
+
+<h2>Suppliers</h2>
+<p>@Html.ActionLink("+ New Supplier", "Create", null, new { @class = "btn btn-primary" })</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Supplier Name</th>
+            <th>Contact Person</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SupplierName</td>
+                <td>@item.ContactPerson</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SupplierId }, new { @class = "btn btn-sm btn-warning" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SupplierId }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

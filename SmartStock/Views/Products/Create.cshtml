@@ -1,0 +1,47 @@
+﻿@model SmartStock.ViewModels.ProductViewModel
+@{
+    ViewBag.Title = "New Product";
+}
+
+<h2>New Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductCode)
+        @Html.TextBoxFor(m => m.ProductCode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ProductCode, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProductName)
+        @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ProductName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.CategoryId)
+        @Html.DropDownListFor(m => m.CategoryId, Model.CategoryList, "-- Select Category --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CategoryId, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.UnitPrice)
+        @Html.TextBoxFor(m => m.UnitPrice, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.UnitPrice, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReorderLevel)
+        @Html.TextBoxFor(m => m.ReorderLevel, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ReorderLevel, "", new { @class = "text-danger" })
+    </div>
+
+    <p class="text-muted"><em>Current Stock will start at 0 and can only be increased via Stock In transactions.</em></p>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}

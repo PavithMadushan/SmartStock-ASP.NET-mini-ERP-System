@@ -1,0 +1,20 @@
+﻿@model SmartStock.Models.Product
+@{
+    ViewBag.Title = "Delete Product";
+}
+
+<h2>Delete Product</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.ProductName</strong> (@Model.ProductCode)?
+    <br />
+    <small>If this product has stock transaction history, it will be deactivated instead of permanently deleted.</small>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ProductId)
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
