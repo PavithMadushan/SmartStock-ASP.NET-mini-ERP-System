@@ -22,3 +22,62 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Dashboard KPI Cards */
+.kpi-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid #2563eb;
+}
+
+    .kpi-card h3 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 5px 0 0 0;
+        color: #1a2942;
+    }
+
+    .kpi-card p.kpi-label {
+        color: #6b7280;
+        margin: 0;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .kpi-card.kpi-products {
+        border-left-color: #2563eb;
+    }
+
+    .kpi-card.kpi-stockin {
+        border-left-color: #16a34a;
+    }
+
+    .kpi-card.kpi-stockout {
+        border-left-color: #ea580c;
+    }
+
+    .kpi-card.kpi-value {
+        border-left-color: #9333ea;
+    }
+
+.chart-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+    .chart-card h4 {
+        margin-top: 0;
+        color: #1a2942;
+        font-weight: 600;
+    }
+
+.low-stock-row td {
+    color: #dc2626;
+}
