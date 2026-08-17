@@ -34,5 +34,5 @@
 
 @if (!Model.Any())
 {
-    <p class="text-muted">No stock out transactions yet.</p>
+    Html.RenderPartial("_EmptyState", "No stock out transactions yet. Click \"+ New Stock Out\" to add one.");
 }

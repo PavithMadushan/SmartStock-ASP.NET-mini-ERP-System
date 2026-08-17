@@ -38,5 +38,5 @@
 
 @if (!Model.Any())
 {
-    <p class="text-muted">No stock in transactions yet.</p>
+    Html.RenderPartial("_EmptyState", "No stock in transactions yet. Click \"+ New Stock In\" to add one.");
 }

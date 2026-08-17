@@ -257,6 +257,7 @@
     <Content Include="Views\Reports\StockInReport.cshtml" />
     <Content Include="Views\Reports\StockOutReport.cshtml" />
     <Content Include="Views\Reports\LowStockReport.cshtml" />
+    <Content Include="Views\Shared\_EmptyState.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

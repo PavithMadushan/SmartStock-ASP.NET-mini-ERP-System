@@ -53,5 +53,5 @@
 
 @if (!Model.Any())
 {
-    <p class="text-muted">No products found.</p>
+    Html.RenderPartial("_EmptyState", "No products found. Try adjusting your search or filter.");
 }

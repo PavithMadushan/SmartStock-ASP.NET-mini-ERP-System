@@ -1,4 +1,6 @@
-﻿@model SmartStock.ViewModels.StockOutReportViewModel
+﻿@using System.Linq
+
+@model SmartStock.ViewModels.StockOutReportViewModel
 @{
     ViewBag.Title = "Stock Out Report";
 }
@@ -56,7 +58,11 @@
     </tbody>
 </table>
 
-@if (!Model.Results.Any())
+
+@if (Model.Results == null || !Model.Results.Any())
 {
-    <p class="text-muted">No stock out transactions found for the selected filters.</p>
+    Html.RenderPartial(
+        "_EmptyState",
+        "No stock out transactions found for the selected filters."
+    );
 }

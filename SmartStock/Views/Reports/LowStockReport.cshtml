@@ -38,3 +38,8 @@
 {
     <p class="text-muted">No low stock products right now.</p>
 }
+
+@if (!Model.Any())
+{
+    Html.RenderPartial("_EmptyState", "No low stock products right now.");
+}

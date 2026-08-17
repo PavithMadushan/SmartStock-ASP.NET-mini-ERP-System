@@ -2,74 +2,138 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title - SmartStock</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body style="padding-top: 70px;">
-    <!-- Bootstrap 5 Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top no-print">
-        <div class="container">
-            @Html.ActionLink("SMARTSTOCK", "Index", "Dashboard", null, new { @class = "navbar-brand fw-bold" })
+<body>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="glyphicon glyphicon-th-large"></span> SMARTSTOCK
+        </div>
+        <ul class="sidebar-nav">
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" ? "active" : "")">
+                @Html.ActionLink(" Dashboard", "Index", "Dashboard", null, new { @class = "glyphicon glyphicon-dashboard" })
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Products" ? "active" : "")">
+                @Html.ActionLink(" Products", "Index", "Products", null, new { @class = "glyphicon glyphicon-tags" })
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Categories" ? "active" : "")">
+                @Html.ActionLink(" Categories", "Index", "Categories", null, new { @class = "glyphicon glyphicon-list-alt" })
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Suppliers" ? "active" : "")">
+                @Html.ActionLink(" Suppliers", "Index", "Suppliers", null, new { @class = "glyphicon glyphicon-briefcase" })
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "StockIn" ? "active" : "")">
+                @Html.ActionLink(" Stock In", "Index", "StockIn", null, new { @class = "glyphicon glyphicon-import" })
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "StockOut" ? "active" : "")">
+                @Html.ActionLink(" Stock Out", "Index", "StockOut", null, new { @class = "glyphicon glyphicon-export" })
+            </li>
+            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Reports" ? "active" : "")">
+                @Html.ActionLink(" Reports", "Index", "Reports", null, new { @class = "glyphicon glyphicon-stats" })
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            @using (Html.BeginForm("Logout", "Account"))
+            {
+                <button type="submit" class="sidebar-logout">
+                    <span class="glyphicon glyphicon-log-out"></span> Logout
+                </button>
+            }
+        </div>
+    </div>
+
+    <!-- Mobile overlay (click to close sidebar on small screens) -->
+    <div class="sidebar-overlay no-print" id="sidebarOverlay"></div>
+
+    <!-- Main content -->
+    <div class="main-wrapper">
+
+        <div class="topbar no-print">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">@Html.ActionLink("Dashboard", "Index", "Dashboard", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Products", "Index", "Products", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Categories", "Index", "Categories", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Suppliers", "Index", "Suppliers", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Stock In", "Index", "StockIn", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Stock Out", "Index", "StockOut", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "nav-link" })</li>
-
-                </ul>
-
-                @if (Request.IsAuthenticated)
-                {
-                    <ul class="navbar-nav ms-auto align-items-center">
-                        <li class="nav-item text-light me-3">
-                            <span class="navbar-text">Welcome, @Session["FullName"]</span>
-                        </li>
-                        <li class="nav-item">
-                            @Html.ActionLink("Logout", "Logout", "Account", null, new { @class = "btn btn-outline-light btn-sm" })
-                        </li>
-                    </ul>
-                }
+            <div class="topbar-title">@ViewBag.Title</div>
+            <div class="topbar-user">
+                <span class="glyphicon glyphicon-user"></span> @Session["FullName"]
+                <span class="badge-role">@Session["Role"]</span>
             </div>
         </div>
-    </nav>
 
-    <div class="container body-content mt-4">
-        @if (TempData["Success"] != null)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                @TempData["Success"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
-        @if (TempData["Error"] != null)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                @TempData["Error"]
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        }
+        <div class="page-content">
 
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - SmartStock</p>
-        </footer>
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible auto-dismiss" role="alert">
+                    <span class="glyphicon glyphicon-ok-sign"></span>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    @TempData["Success"]
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <span class="glyphicon glyphicon-remove-sign"></span>
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    @TempData["Error"]
+                </div>
+            }
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+    <!-- Global page loading overlay -->
+    <div id="pageLoader" class="page-loader">
+        <div class="page-loader-spinner"></div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        // Sidebar toggle for mobile
+        $('#sidebarToggle').on('click', function () {
+            $('#sidebar').toggleClass('sidebar-open');
+            $('#sidebarOverlay').toggleClass('sidebar-overlay-visible');
+        });
+        $('#sidebarOverlay').on('click', function () {
+            $('#sidebar').removeClass('sidebar-open');
+            $(this).removeClass('sidebar-overlay-visible');
+        });
+
+        // Auto-dismiss success alerts after 4 seconds
+        setTimeout(function () {
+            $('.auto-dismiss').fadeOut('slow');
+        }, 4000);
+
+        // Show a brief loading overlay whenever a form is submitted or a link is clicked,
+        // so the interviewer sees clear feedback instead of a "did it freeze?" pause.
+        $('#pageLoader').hide();
+        $('form').on('submit', function () {
+            if ($(this).valid === undefined || $(this).valid()) {
+                $('#pageLoader').fadeIn(100);
+            }
+        });
+        $('a.nav-loading-link, .sidebar-nav a, .topbar-title-link').on('click', function () {
+            $('#pageLoader').fadeIn(100);
+        });
+
+        // Prevent double-submits and give clear "Saving..." feedback
+        $('form').on('submit', function () {
+            var $btn = $(this).find('button[type="submit"]');
+            if ($btn.length && ($(this).valid === undefined || $(this).valid())) {
+                $btn.prop('disabled', true).text('Saving...');
+            }
+        });
+    </script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
