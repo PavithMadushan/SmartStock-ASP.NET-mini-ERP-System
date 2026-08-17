@@ -81,3 +81,44 @@ textarea {
 .low-stock-row td {
     color: #dc2626;
 }
+
+/* Report cards on Reports menu page */
+.report-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 25px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+    .report-card h4 {
+        color: #1a2942;
+        font-weight: 600;
+    }
+
+    .report-card p {
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+/* Print-friendly report layout */
+@media print {
+    .navbar, .no-print, footer, .btn, form {
+        display: none !important;
+    }
+
+    .body-content {
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 1px solid #333 !important;
+    }
+}

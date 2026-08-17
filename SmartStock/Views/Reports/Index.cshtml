@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Reports";
+}
+
+<h2>Reports</h2>
+
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="report-card">
+            <h4>Stock Summary Report</h4>
+            <p>View overall stock summary of all items.</p>
+            @Html.ActionLink("Generate", "StockSummary", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="report-card">
+            <h4>Stock In Report</h4>
+            <p>View all stock in transactions.</p>
+            @Html.ActionLink("Generate", "StockInReport", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="report-card">
+            <h4>Stock Out Report</h4>
+            <p>View all stock out transactions.</p>
+            @Html.ActionLink("Generate", "StockOutReport", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="report-card">
+            <h4>Low Stock Report</h4>
+            <p>View items that are below reorder level.</p>
+            @Html.ActionLink("Generate", "LowStockReport", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>

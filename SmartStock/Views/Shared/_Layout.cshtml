@@ -9,7 +9,7 @@
 </head>
 <body style="padding-top: 70px;">
     <!-- Bootstrap 5 Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top no-print">
         <div class="container">
             @Html.ActionLink("SMARTSTOCK", "Index", "Dashboard", null, new { @class = "navbar-brand fw-bold" })
 
@@ -25,6 +25,7 @@
                     <li class="nav-item">@Html.ActionLink("Suppliers", "Index", "Suppliers", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Stock In", "Index", "StockIn", null, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Stock Out", "Index", "StockOut", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Reports", "Index", "Reports", null, new { @class = "nav-link" })</li>
 
                 </ul>
 

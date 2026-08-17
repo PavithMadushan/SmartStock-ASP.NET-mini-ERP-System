@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SmartStock.ViewModels.LowStockItem>
+@{
+    ViewBag.Title = "Low Stock Report";
+}
+
+<div class="no-print" style="margin-bottom: 15px;">
+    <h2>Low Stock Report</h2>
+    <button onclick="window.print();" class="btn btn-default">Print Report</button>
+    @Html.ActionLink("Export to Excel", "ExportLowStockReport", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Back to Reports", "Index", null, new { @class = "btn btn-link" })
+</div>
+
+<h3 class="visible-print-block" style="display:none;">Low Stock Report</h3>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Current Stock</th>
+            <th>Reorder Level</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="danger">
+                <td>@item.ProductName</td>
+                <td>@item.CategoryName</td>
+                <td>@item.CurrentStock</td>
+                <td>@item.ReorderLevel</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p class="text-muted">No low stock products right now.</p>
+}

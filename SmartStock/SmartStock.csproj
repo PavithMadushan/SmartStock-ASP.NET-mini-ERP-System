@@ -132,6 +132,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StockInController.cs" />
     <Compile Include="Controllers\StockOutController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
@@ -150,8 +151,11 @@
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\StockInReportViewModel.cs" />
     <Compile Include="ViewModels\StockInViewModel.cs" />
+    <Compile Include="ViewModels\StockOutReportViewModel.cs" />
     <Compile Include="ViewModels\StockOutViewModel.cs" />
+    <Compile Include="ViewModels\StockSummaryReportItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -248,6 +252,11 @@
     <Content Include="Views\StockOut\Index.cshtml" />
     <Content Include="Views\StockOut\Create.cshtml" />
     <Content Include="Views\StockOut\Details.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\StockSummary.cshtml" />
+    <Content Include="Views\Reports\StockInReport.cshtml" />
+    <Content Include="Views\Reports\StockOutReport.cshtml" />
+    <Content Include="Views\Reports\LowStockReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
