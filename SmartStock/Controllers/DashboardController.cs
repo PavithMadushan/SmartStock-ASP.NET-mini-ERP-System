@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using SmartStock.Data;
+using SmartStock.Helpers;
 using SmartStock.ViewModels;
 
 namespace SmartStock.Controllers
@@ -22,15 +23,32 @@ namespace SmartStock.Controllers
                 LowStockProducts = GetLowStockProducts()
             };
 
+            ApplyCurrencyConversion(model);
             BuildMonthlyMovementChart(model);
             BuildCategoryChart(model);
 
             return View(model);
         }
 
-        // --- KPI Queries ---
-        // Each of these uses Count()/Sum()/GroupBy() so aggregation happens
-        // on the SQL Server side, not by loading full tables into memory.
+        // Converts the LKR Current Stock Value into USD/AUD/NZD using live rates.
+        // If the API call fails for any reason, the Dashboard simply shows LKR only -
+        // this enhancement must never break the page.
+        private void ApplyCurrencyConversion(DashboardViewModel model)
+        {
+            var rates = CurrencyExchangeHelper.GetLkrRates();
+
+            model.ExchangeRatesAvailable = rates.Success;
+
+            if (rates.Success)
+            {
+                model.CurrentStockValueUSD = model.CurrentStockValue * rates.Rates["USD"];
+                model.CurrentStockValueAUD = model.CurrentStockValue * rates.Rates["AUD"];
+                model.CurrentStockValueNZD = model.CurrentStockValue * rates.Rates["NZD"];
+                model.ExchangeRatesAsOfDate = rates.AsOfDate;
+            }
+        }
+
+        // --- KPI Queries (unchanged from Phase 5) ---
 
         private int GetTotalProducts()
         {
@@ -61,7 +79,6 @@ namespace SmartStock.Controllers
 
         private decimal GetCurrentStockValue()
         {
-            // Stock Value = sum of (CurrentStock x UnitPrice) across all active products
             return db.Products
                 .Where(p => p.IsActive)
                 .Select(p => (decimal?)(p.CurrentStock * p.UnitPrice))
@@ -85,7 +102,6 @@ namespace SmartStock.Controllers
                 .ToList();
         }
 
-        // --- Chart 1: Monthly Stock Movement (last 6 months, including current) ---
         private void BuildMonthlyMovementChart(DashboardViewModel model)
         {
             model.ChartMonths = new System.Collections.Generic.List<string>();
@@ -116,7 +132,6 @@ namespace SmartStock.Controllers
             }
         }
 
-        // --- Chart 2: Stock by Category (based on current stock quantity per category) ---
         private void BuildCategoryChart(DashboardViewModel model)
         {
             var categoryData = db.Products

@@ -427,3 +427,122 @@ body {
     background-color: rgba(255,255,255,0.08);
     margin: 10px 20px;
 }
+
+/* Current Stock Value banner (LKR left, USD/AUD/NZD right) */
+.kpi-value-banner {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 20px 25px;
+    margin-bottom: 5px;
+    border-left: 4px solid #9333ea;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.value-banner-left h3 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 5px 0 0 0;
+    color: #1a2942;
+}
+
+.value-banner-right {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.currency-chip {
+    background: #f8f7ff;
+    border: 1px solid #ede9fe;
+    border-radius: 8px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 90px;
+}
+
+    .currency-chip .currency-code {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: #9333ea;
+        letter-spacing: 0.5px;
+    }
+
+    .currency-chip .currency-amount {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1a2942;
+        margin-top: 2px;
+    }
+
+.exchange-rate-date {
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+@@media (max-width: 767px) {
+    .kpi-value-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .value-banner-right {
+        margin-top: 15px;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .currency-chip {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* =======================================================
+   GLOBAL FORM SPACING & CONTROLS FIX (Bootstrap 5 Support)
+   ======================================================= */
+
+/* 1. Restore vertical spacing for all form-groups */
+.form-group {
+    margin-bottom: 18px;
+}
+
+    /* 2. Ensure labels have slight breathing space above inputs */
+    .form-group label,
+    .control-label {
+        display: inline-block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #374151;
+    }
+
+/* 3. Add top margin and spacing to submit/cancel buttons in forms */
+form button[type="submit"],
+form input[type="submit"],
+form .btn-primary,
+form .btn-danger {
+    margin-top: 10px;
+    margin-right: 6px;
+}
+
+/* 4. Ensure cancel/secondary buttons align with submit buttons */
+form .btn-default,
+form .btn-secondary,
+form .btn-link {
+    margin-top: 10px;
+}
+
+/* 5. Special spacing for Login page card */
+.login-card .form-group {
+    margin-bottom: 18px;
+}
+
+.login-card .btn-login {
+    margin-top: 15px;
+}

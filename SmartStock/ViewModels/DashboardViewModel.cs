@@ -8,7 +8,14 @@ namespace SmartStock.ViewModels
         public int TotalProducts { get; set; }
         public int TotalStockInThisMonth { get; set; }
         public int TotalStockOutThisMonth { get; set; }
-        public decimal CurrentStockValue { get; set; }
+        public decimal CurrentStockValue { get; set; } // LKR - unchanged, shown on the left
+
+        // Currency conversion (new)
+        public bool ExchangeRatesAvailable { get; set; }
+        public decimal CurrentStockValueUSD { get; set; }
+        public decimal CurrentStockValueAUD { get; set; }
+        public decimal CurrentStockValueNZD { get; set; }
+        public string ExchangeRatesAsOfDate { get; set; }
 
         // Low Stock Alert table
         public List<LowStockItem> LowStockProducts { get; set; }

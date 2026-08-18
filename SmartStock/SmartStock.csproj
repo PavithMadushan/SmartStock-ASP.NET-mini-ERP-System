@@ -140,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CurrencyExchangeHelper.cs" />
     <Compile Include="Helper\CustomAuthorizeAttribute.cs" />
     <Compile Include="Helper\PasswordHelper.cs" />
     <Compile Include="Models\Category.cs" />
