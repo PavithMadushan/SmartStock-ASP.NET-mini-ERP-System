@@ -546,3 +546,30 @@ form .btn-link {
 .login-card .btn-login {
     margin-top: 15px;
 }
+
+/* ============ TOPBAR USER PROFILE ============ */
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #374151;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #e0e7ff;
+    color: #2563eb;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.profile-name {
+    font-weight: 600;
+    color: #1a2942;
+}

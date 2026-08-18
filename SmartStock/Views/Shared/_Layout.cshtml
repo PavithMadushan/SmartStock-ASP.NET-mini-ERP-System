@@ -66,8 +66,10 @@
             </button>
             <div class="topbar-title">@ViewBag.Title</div>
             <div class="topbar-user">
-                <span class="glyphicon glyphicon-user"></span> @Session["FullName"]
-                <span class="badge-role">@User.Identity.Name</span>
+                <span class="profile-avatar">
+                    <span class="glyphicon glyphicon-user"></span>
+                </span>
+                <span class="profile-name">@Session["FullName"]</span>
             </div>
         </div>
 
