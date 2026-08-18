@@ -140,6 +140,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\CustomAuthorizeAttribute.cs" />
     <Compile Include="Helper\PasswordHelper.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Product.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="ViewModels\DashboardViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\StockInReportViewModel.cs" />
     <Compile Include="ViewModels\StockInViewModel.cs" />
     <Compile Include="ViewModels\StockOutReportViewModel.cs" />
@@ -258,6 +260,8 @@
     <Content Include="Views\Reports\StockOutReport.cshtml" />
     <Content Include="Views\Reports\LowStockReport.cshtml" />
     <Content Include="Views\Shared\_EmptyState.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

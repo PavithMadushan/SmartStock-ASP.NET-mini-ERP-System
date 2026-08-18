@@ -3,24 +3,34 @@
     ViewBag.Title = "Products";
 }
 
-<h2>Products</h2>
-
-<div class="row" style="margin-bottom: 15px;">
-    <div class="col-md-8">
-        @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "form-inline" }))
-        {
-            <input type="text" name="searchTerm" value="@ViewBag.SearchTerm" class="form-control" placeholder="Search by code or name..." style="width: 250px;" />
-            @Html.DropDownList("categoryId", (SelectList)ViewBag.Categories, "All Categories", new { @class = "form-control" })
-            <button type="submit" class="btn btn-default">Search</button>
-            @Html.ActionLink("Reset", "Index", null, new { @class = "btn btn-link" })
-        }
-    </div>
-    <div class="col-md-4 text-right">
-        @Html.ActionLink("+ Add Product", "Create", null, new { @class = "btn btn-primary" })
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h2 class="m-0">Products</h2>    
 </div>
 
-<table class="table table-striped table-bordered">
+<div class="card p-3 mb-4 shadow-sm border-0 bg-white">
+    @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "d-flex flex-wrap align-items-center justify-content-between gap-2 m-0" }))
+    {
+        <div class="d-flex flex-wrap align-items-center gap-2">
+            <input type="text"
+                   name="searchTerm"
+                   value="@ViewBag.SearchTerm"
+                   class="form-control"
+                   placeholder="Search by code or name..."
+                   style="min-width: 240px; max-width: 300px;" />
+
+            @Html.DropDownList("categoryId", (SelectList)ViewBag.Categories, "All Categories", new { @class = "form-select", style = "min-width: 180px; max-width: 220px;" })
+
+            <button type="submit" class="btn btn-primary">Search</button>
+            @Html.ActionLink("Reset", "Index", null, new { @class = "btn btn-outline-secondary" })
+        </div>
+
+        <div>
+            @Html.ActionLink("+ Add Product", "Create", null, new { @class = "btn btn-success" })
+        </div>
+    }
+</div>
+
+<table class="table table-striped table-bordered align-middle">
     <thead>
         <tr>
             <th>Code</th>
@@ -29,18 +39,22 @@
             <th>Unit Price</th>
             <th>Current Stock</th>
             <th>Reorder Level</th>
-            <th>Actions</th>
+            <th style="width: 150px;">Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="@(item.CurrentStock <= item.ReorderLevel ? "danger" : "")">
+            <tr class="@(item.CurrentStock <= item.ReorderLevel ? "table-danger" : "")">
                 <td>@item.ProductCode</td>
                 <td>@item.ProductName</td>
                 <td>@item.Category.CategoryName</td>
                 <td>@item.UnitPrice.ToString("N2")</td>
-                <td>@item.CurrentStock</td>
+                <td>
+                    <span class="badge @(item.CurrentStock <= item.ReorderLevel ? "bg-danger" : "bg-secondary")">
+                        @item.CurrentStock
+                    </span>
+                </td>
                 <td>@item.ReorderLevel</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-sm btn-warning" })

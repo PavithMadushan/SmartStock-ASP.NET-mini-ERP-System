@@ -5,9 +5,11 @@ using System.Text;
 using System.Web.Mvc;
 using SmartStock.Data;
 using SmartStock.ViewModels;
+using SmartStock.Helpers;
 
 namespace SmartStock.Controllers
 {
+    [CustomAuthorize(Roles = "Admin")]
     public class ReportsController : Controller
     {
         private SmartStockDbContext db = new SmartStockDbContext();

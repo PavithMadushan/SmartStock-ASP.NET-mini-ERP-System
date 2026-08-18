@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Access Denied";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="empty-state">
+    <span class="glyphicon glyphicon-lock" style="color:#dc2626;"></span>
+    <h3 style="color:#1a2942; margin-top:10px;">Access Denied</h3>
+    <p>You don't have permission to view this page. If you believe this is a mistake, please contact your system administrator.</p>
+    <br />
+    @Html.ActionLink("Back to Dashboard", "Index", "Dashboard", null, new { @class = "btn btn-primary" })
+</div>

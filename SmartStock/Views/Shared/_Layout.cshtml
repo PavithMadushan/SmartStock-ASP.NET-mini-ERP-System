@@ -33,9 +33,16 @@
             <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "StockOut" ? "active" : "")">
                 @Html.ActionLink(" Stock Out", "Index", "StockOut", null, new { @class = "glyphicon glyphicon-export" })
             </li>
-            <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Reports" ? "active" : "")">
-                @Html.ActionLink(" Reports", "Index", "Reports", null, new { @class = "glyphicon glyphicon-stats" })
-            </li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Reports" ? "active" : "")">
+                    @Html.ActionLink(" Reports", "Index", "Reports", null, new { @class = "glyphicon glyphicon-stats" })
+                </li>
+                <li class="sidebar-divider"></li>
+                <li class="@(ViewContext.RouteData.Values["action"].ToString() == "Register" ? "active" : "")">
+                    @Html.ActionLink(" Add User", "Register", "Account", null, new { @class = "glyphicon glyphicon-user" })
+                </li>
+            }
         </ul>
         <div class="sidebar-footer">
             @using (Html.BeginForm("Logout", "Account"))
@@ -60,7 +67,7 @@
             <div class="topbar-title">@ViewBag.Title</div>
             <div class="topbar-user">
                 <span class="glyphicon glyphicon-user"></span> @Session["FullName"]
-                <span class="badge-role">@Session["Role"]</span>
+                <span class="badge-role">@User.Identity.Name</span>
             </div>
         </div>
 
