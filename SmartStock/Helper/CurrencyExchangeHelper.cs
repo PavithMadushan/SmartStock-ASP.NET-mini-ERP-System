@@ -79,9 +79,6 @@ namespace SmartStock.Helpers
 
             try
             {
-                // Older .NET Framework apps default to an outdated TLS version.
-                // Frankfurter's HTTPS endpoint requires TLS 1.2, so this must be
-                // set explicitly or the request fails with a connection error.
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
                 string apiUrl = ConfigurationManager.AppSettings["FrankfurterApiUrl"];
@@ -113,7 +110,7 @@ namespace SmartStock.Helpers
             {
                 // Network issue, API downtime, DNS failure, etc.
                 // This is an enhancement feature - it must never break the Dashboard,
-                // so we swallow the error and simply report failure.
+                // so swallow the error and simply report failure.
                 result.Success = false;
             }
 
@@ -125,7 +122,7 @@ namespace SmartStock.Helpers
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             request.Accept = "application/json";
-            request.Timeout = timeoutMs;               // don't let a slow API freeze the Dashboard
+            request.Timeout = timeoutMs;               
             request.ReadWriteTimeout = timeoutMs;
 
             using (var response = (HttpWebResponse)request.GetResponse())

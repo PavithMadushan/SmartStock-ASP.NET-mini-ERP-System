@@ -42,8 +42,7 @@ namespace SmartStock.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Use a database transaction so the StockIn record and the
-                // Product.CurrentStock update either BOTH succeed or BOTH fail.
+                // Use a database transaction so the StockIn record and the Product.CurrentStock update either BOTH succeed or BOTH fail.
                 using (var transaction = db.Database.BeginTransaction())
                 {
                     try
@@ -63,7 +62,7 @@ namespace SmartStock.Controllers
                             SupplierId = model.SupplierId,
                             Quantity = model.Quantity,
                             UnitCost = model.UnitCost,
-                            TotalCost = model.Quantity * model.UnitCost, // Business rule: TotalCost = Quantity x UnitCost
+                            TotalCost = model.Quantity * model.UnitCost, // TotalCost = Quantity x UnitCost
                             StockInDate = DateTime.Now,
                             ReferenceNo = model.ReferenceNo,
                             Remarks = model.Remarks
@@ -93,7 +92,7 @@ namespace SmartStock.Controllers
             return View(model);
         }
 
-        // GET: StockIn/Details/5  (used by the "View" action link)
+        // GET: StockIn/Details/5 
         public ActionResult Details(int? id)
         {
             if (id == null) return HttpNotFound();

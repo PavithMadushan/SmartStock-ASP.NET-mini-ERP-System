@@ -44,8 +44,7 @@ namespace SmartStock.Controllers
                 {
                     try
                     {
-                        // Always re-fetch the product from the DB to get the true, current
-                        // stock level - never trust a value that might have been posted from the client.
+                        // Always re-fetch the product from the DB to get the true                        
                         var product = db.Products.Find(model.ProductId);
                         if (product == null)
                         {
@@ -54,7 +53,7 @@ namespace SmartStock.Controllers
                             return View(model);
                         }
 
-                        // Core business rule: Requested Quantity must not exceed Current Stock
+                        // Requested Quantity must not exceed Current Stock
                         if (model.Quantity > product.CurrentStock)
                         {
                             ModelState.AddModelError("Quantity", "Insufficient stock available.");
@@ -75,7 +74,7 @@ namespace SmartStock.Controllers
 
                         db.StockOuts.Add(stockOut);
 
-                        // Core business rule: New Stock = Current Stock - Quantity
+                        // New Stock = Current Stock - Quantity
                         product.CurrentStock -= model.Quantity;
 
                         db.SaveChanges();

@@ -8,7 +8,6 @@ namespace SmartStock.Helpers
     {
         /// <summary>
         /// Hashes a plain text password using SHA256.
-        /// Simple and dependency-free, appropriate for this project's scope.
         /// </summary>
         public static string HashPassword(string plainTextPassword)
         {

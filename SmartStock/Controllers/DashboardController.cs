@@ -31,8 +31,7 @@ namespace SmartStock.Controllers
         }
 
         // Converts the LKR Current Stock Value into USD/AUD/NZD using live rates.
-        // If the API call fails for any reason, the Dashboard simply shows LKR only -
-        // this enhancement must never break the page.
+        // If the API call fails for any reason, the Dashboard simply shows LKR only         
         private void ApplyCurrencyConversion(DashboardViewModel model)
         {
             var rates = CurrencyExchangeHelper.GetLkrRates();
@@ -48,8 +47,7 @@ namespace SmartStock.Controllers
             }
         }
 
-        // --- KPI Queries (unchanged from Phase 5) ---
-
+        //  KPI Queries 
         private int GetTotalProducts()
         {
             return db.Products.Count(p => p.IsActive);

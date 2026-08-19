@@ -6,7 +6,6 @@ namespace SmartStock.Helpers
     /// Behaves exactly like [Authorize], except that a user who IS logged in
     /// but doesn't have the required role is redirected to a friendly
     /// "Access Denied" page instead of being bounced back to the Login page
-    /// (which would look like they'd been logged out).
     /// </summary>
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {

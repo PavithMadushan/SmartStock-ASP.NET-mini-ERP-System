@@ -45,9 +45,7 @@ namespace SmartStock.Controllers
                 return View(model);
             }
 
-            // Build a Forms Authentication ticket that carries the user's Role
-            // in UserData. This is what lets [Authorize(Roles="Admin")] work later,
-            // since the role needs to travel inside the encrypted cookie itself.
+            // Build a Forms Authentication ticket that carries the user's Role in UserData.
             var ticket = new FormsAuthenticationTicket(
                 1,                              // version
                 user.Username,                  // name (becomes User.Identity.Name)
@@ -60,11 +58,11 @@ namespace SmartStock.Controllers
             string encryptedTicket = FormsAuthentication.Encrypt(ticket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
-                HttpOnly = true // JavaScript can't read this cookie - reduces XSS risk
+                HttpOnly = true 
             };
             Response.Cookies.Add(authCookie);
 
-            // FullName is still convenient to keep in Session for display purposes
+            // keep in Session for display purposes
             Session["FullName"] = user.FullName;
             Session["UserId"] = user.UserId;
 
@@ -116,8 +114,7 @@ namespace SmartStock.Controllers
                     Password = PasswordHelper.HashPassword(model.Password),
                     FullName = model.FullName,
                     // Role is ALWAYS hardcoded to "User" here, regardless of what
-                    // was posted from the browser. Never trust the client for
-                    // anything security-sensitive like role assignment.
+                    
                     Role = "User",
                     IsActive = true,
                     CreatedDate = DateTime.Now
@@ -143,9 +140,7 @@ namespace SmartStock.Controllers
 
         private System.Web.Mvc.SelectList BuildRoleList()
         {
-            // Only "User" can ever be created through Sign-Up. There is
-            // intentionally only ever one Admin (the seeded account) - creating
-            // more Admins through a web form would be a privilege-escalation risk.
+            // Only "User" can ever be created through Sign-Up.            
             return new System.Web.Mvc.SelectList(new[] { "User" });
         }
 

@@ -65,7 +65,7 @@ namespace SmartStock.Controllers
                     CategoryId = model.CategoryId,
                     UnitPrice = model.UnitPrice,
                     ReorderLevel = model.ReorderLevel,
-                    CurrentStock = 0, // New products ALWAYS start at zero stock - never taken from the form
+                    CurrentStock = 0, // New products ALWAYS start at zero stock 
                     IsActive = true,
                     CreatedDate = DateTime.Now
                 };
@@ -118,9 +118,7 @@ namespace SmartStock.Controllers
                 var product = db.Products.Find(model.ProductId);
                 if (product == null) return HttpNotFound();
 
-                // Only editable fields are updated here.
-                // CurrentStock is intentionally NEVER set from this form -
-                // it is only ever changed by StockIn/StockOut transactions (Phase 4).
+                // Only editable fields are updated here.                
                 product.ProductCode = model.ProductCode;
                 product.ProductName = model.ProductName;
                 product.CategoryId = model.CategoryId;
@@ -159,8 +157,7 @@ namespace SmartStock.Controllers
 
             if (hasTransactions)
             {
-                // Business rule: products with transaction history can't be hard-deleted
-                // (it would corrupt StockIn/StockOut records). Deactivate instead.
+                // Business rule: products with transaction history can't be hard-deleted                
                 product.IsActive = false;
                 db.SaveChanges();
                 TempData["Success"] = "Product cannot be deleted because it has transaction history, so it was deactivated instead.";

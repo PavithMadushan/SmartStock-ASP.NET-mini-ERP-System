@@ -5,7 +5,7 @@ namespace SmartStock.Data
 {
     public class SmartStockDbContext : DbContext
     {
-        // "SmartStockDbContext" matches the connection string name in Web.config
+        // matches the connection string name in Web.config
         public SmartStockDbContext() : base("name=SmartStockDbContext")
         {
         }
@@ -19,7 +19,7 @@ namespace SmartStock.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // We created the DB manually with our own SQL script,
+            // created the DB manually with our own SQL script,
             // so tell EF not to try to create/migrate it.
             Database.SetInitializer<SmartStockDbContext>(null);
 
